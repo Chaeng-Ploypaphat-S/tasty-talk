@@ -1,0 +1,28 @@
+version: '3'
+services:
+  profile-management:
+    image: chaengsaltz/tt-profile-management:latest
+    container_name: profile-management
+    ports:
+      - "8002:8002"
+    depends_on:
+      - postgres_profile_management
+    environment:
+      - POSTGRES_HOST=postgres_profile_management
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=profile_user
+      - POSTGRES_PASSWORD=profile_password
+      - POSTGRES_DB=profile_management
+
+  postgres_profile_management:
+    image: postgres:16
+    container_name: postgres_profile_management
+    environment:
+      - POSTGRES_DB=profile_management
+      - POSTGRES_USER=profile_user
+      - POSTGRES_PASSWORD=profile_password
+    volumes:
+      - postgres_profile_management_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_profile_management_data:
