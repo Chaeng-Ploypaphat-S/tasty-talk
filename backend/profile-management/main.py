@@ -15,7 +15,7 @@ class Profile(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
-    address = Column(String, default=None)
+    address = Column(String, default=None, index=True)
 
 Base.metadata.create_all(bind=engine)
 
@@ -23,14 +23,14 @@ Base.metadata.create_all(bind=engine)
 class ProfileType:
     id: int
     name: str
-    email: str
+    email: str = strawberry.field(default=None)
     address: str = strawberry.field(default=None)
 
 def get_profiles():
     db = SessionLocal()
     profiles = db.query(Profile).all()
     db.close()
-    return [ProfileType(id=p.id, name=p.name, email=p.email) for p in profiles]
+    return [ProfileType(id=p.id, name=p.name, email=p.email, address=p.address) for p in profiles]
 
 @strawberry.type
 class Query:
