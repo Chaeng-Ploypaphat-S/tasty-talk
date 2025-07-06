@@ -1,28 +1,28 @@
 version: '3'
 services:
-  profile-management:
-    image: chaengsaltz/tt-profile-management:latest
-    container_name: profile-management
+  vendor-profile-management:
+    image: chaengsaltz/tt-vendor-profile-management:latest
+    container_name: vendor-profile-management
     ports:
       - "8002:8002"
     depends_on:
-      - postgres_profile_management
+      - postgres_vendor_profile_management
     environment:
-      - POSTGRES_HOST=postgres_profile_management
+      - POSTGRES_HOST=postgres_vendor_profile_management
       - POSTGRES_PORT=5432
-      - POSTGRES_USER=profile_user
-      - POSTGRES_PASSWORD=profile_password
-      - POSTGRES_DB=profile_management
+      - POSTGRES_USER=vendor
+      - POSTGRES_PASSWORD=vendor_password
+      - POSTGRES_DB=vendor
 
-  postgres_profile_management:
+  postgres_vendor_profile_management:
     image: postgres:16
-    container_name: postgres_profile_management
+    container_name: postgres_vendor_profile_management
     environment:
-      - POSTGRES_DB=profile_management
-      - POSTGRES_USER=profile_user
-      - POSTGRES_PASSWORD=profile_password
+      - POSTGRES_DB=vendor
+      - POSTGRES_USER=vendor
+      - POSTGRES_PASSWORD=vendor_password
     volumes:
-      - postgres_profile_management_data:/var/lib/postgresql/data
+      - postgres_profile_management_data:/var/lib/postgresql/vendor_data
 
 volumes:
   postgres_profile_management_data:
