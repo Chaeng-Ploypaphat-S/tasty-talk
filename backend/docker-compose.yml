@@ -22,7 +22,7 @@ services:
       - POSTGRES_USER=vendor
       - POSTGRES_PASSWORD=vendor_password
     volumes:
-      - postgres_profile_management_data:/var/lib/postgresql/vendor_data
+      - postgres_vendor_profile_management_data:/var/lib/postgresql/vendor_data
 
 volumes:
-  postgres_profile_management_data:
+  postgres_vendor_profile_management_data:
