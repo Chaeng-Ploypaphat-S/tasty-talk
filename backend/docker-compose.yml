@@ -6,23 +6,23 @@ services:
     ports:
       - "8002:8002"
     depends_on:
-      - postgres_vendor_profile_management
+      - vendor_profile_management
     environment:
-      - POSTGRES_HOST=postgres_vendor_profile_management
+      - POSTGRES_HOST=vendor_profile_management
       - POSTGRES_PORT=5432
       - POSTGRES_USER=vendor
       - POSTGRES_PASSWORD=vendor_password
       - POSTGRES_DB=vendor
 
-  postgres_vendor_profile_management:
+  vendor_profile_management:
     image: postgres:16
-    container_name: postgres_vendor_profile_management
+    container_name: vendor_profile_management
     environment:
       - POSTGRES_DB=vendor
       - POSTGRES_USER=vendor
       - POSTGRES_PASSWORD=vendor_password
     volumes:
-      - postgres_vendor_profile_management_data:/var/lib/postgresql/vendor_data
+      - vendor_profile_management_data:/var/lib/postgresql/vendor_data
 
 volumes:
-  postgres_vendor_profile_management_data:
+  vendor_profile_management_data:
