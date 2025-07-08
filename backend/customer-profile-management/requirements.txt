@@ -1,0 +1,5 @@
+SQLAlchemy>=2.0
+fastapi
+strawberry-graphql
+uvicorn
+psycopg2-binary
