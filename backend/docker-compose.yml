@@ -1,5 +1,29 @@
 version: '3'
 services:
+  customer-profile-management:
+    image: chaengsaltz/tt-customer-profile-management:latest
+    container_name: customer-profile-management
+    ports:
+      - "8001:8001"
+    depends_on:
+      - customer_profile_management
+    environment:
+      - POSTGRES_HOST=customer_profile_management
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=customer
+      - POSTGRES_PASSWORD=customer_password
+      - POSTGRES_DB=customer
+  
+  customer_profile_management:
+    image: postgres:16
+    container_name: customer_profile_management
+    environment:
+      - POSTGRES_DB=customer
+      - POSTGRES_USER=customer
+      - POSTGRES_PASSWORD=customer_password
+    volumes:
+      - customer_profile_management_data:/var/lib/postgresql/customer_data
+
   vendor-profile-management:
     image: chaengsaltz/tt-vendor-profile-management:latest
     container_name: vendor-profile-management
@@ -26,3 +50,4 @@ services:
 
 volumes:
   vendor_profile_management_data:
+  customer_profile_management_data:
